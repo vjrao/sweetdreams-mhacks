@@ -65,20 +65,22 @@ public class Game {
 
 			@Override
 			public void run() {
-
-				try{
-					AudioInputStream audioInputStream =
-							AudioSystem.getAudioInputStream(new File("fallill.wav"));
-					Clip clip = AudioSystem.getClip();
-					clip.open(audioInputStream);
-					clip.start();
-				}
-				catch(Exception ex)
-				{
+				while (true){
+					try{
+						AudioInputStream audioInputStream =
+								AudioSystem.getAudioInputStream(new File("fallill.wav"));
+						Clip clip = AudioSystem.getClip();
+						clip.open(audioInputStream);
+						clip.start();
+						Thread.sleep((long) (clip.getMicrosecondLength()*Math.pow(10, -3)+1));
+					}
+					catch(Exception ex)
+					{
+					}
+					
 				}
 			}
 		}).start();
-
 	}
 
 }
