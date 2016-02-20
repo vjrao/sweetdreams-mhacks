@@ -1,7 +1,7 @@
 package entities;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import physics.*;
 
@@ -20,7 +20,7 @@ public class Virus extends Sprite {
 		v.y = yvel;
 	}
 
-	public void draw(Graphics g, int winWidth, int winHeight) {
+	public void draw(Graphics2D g, int winWidth, int winHeight) {
 		g.setColor(Color.MAGENTA);
 		g.fillOval((int) (pos.x - radius), (int) (pos.y - radius), (int) (2 * radius), (int) (2 * radius));
 	}

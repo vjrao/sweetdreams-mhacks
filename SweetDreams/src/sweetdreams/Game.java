@@ -8,9 +8,12 @@ public class Game {
 	public static void main(String[] args) {
 
 		System.setProperty("sun.java2d.opengl", "true");
+		System.setProperty("sun.awt.noerasebackground", "true");
+
 		System.out.println("Hello, world! Trying to actually run a game here, amazingly enough!");
 
-		final Environment top = new Environment(), bottom = new Environment();
+		final VirusEnvironment top = new VirusEnvironment();
+		final PlayerEnvironment bottom = new PlayerEnvironment();
 		top.addElement(new Crate(100, 105, 10, 0));
 		top.addElement(new Crate(100, 400, 0, -100));
 		top.addElement(new Ground(1, 5));
@@ -24,11 +27,16 @@ public class Game {
 					long tcurr = System.nanoTime();
 					long tdelta = tcurr - t1;
 					t1 = tcurr;
-					
+
+					// Updates:
+					// sprite move animation
+					// ground generate/vanish calculation
+
 					// update player character with key impulses
+					// update viruses with artificial impulses
+					// update player world with virus influence
 					// update virus world with player influence
-					// change player physics
-					
+
 					PhysicsEngine.update(top, tdelta);
 					PhysicsEngine.update(bottom, tdelta);
 					try {
@@ -40,7 +48,7 @@ public class Game {
 		}).start();
 		new Thread(new Runnable() {
 			public void run() {
-				Renderer renderer = new Renderer();
+				Renderer renderer = new Renderer(bottom);
 				for (;;) {
 					renderer.update(top, bottom);
 					try {
