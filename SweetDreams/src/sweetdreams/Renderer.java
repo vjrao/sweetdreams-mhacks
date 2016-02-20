@@ -41,6 +41,9 @@ public class Renderer {
 
 			public void handleKeys(int keycode, boolean state) {
 				switch (keycode) {
+				case KeyEvent.VK_ESCAPE:
+					System.exit(0);
+					break;
 				case KeyEvent.VK_UP:
 					keyCallbacks.setKey(0, state);
 					break;
