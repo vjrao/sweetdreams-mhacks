@@ -1,3 +1,4 @@
+package sweetdreams;
 
 public class MovingObject {
 	public Vec d,v,a;
