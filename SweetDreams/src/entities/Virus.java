@@ -1,18 +1,32 @@
 package entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 
-import sweetdreams.Sprite;
+import physics.*;
 
 public class Virus extends Sprite {
+	private static final double radius = 40;
 
-	public Virus(int startX, int startY) {
-		super(startX, startY);
+	public Virus(double res, double invm) {
+		super(res, invm);
 	}
-	
-	public void draw(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
+
+	public Virus(double res, double invm, double x, double y, double xvel, double yvel) {
+		super(res, invm);
+		pos.x = x;
+		pos.y = y;
+		v.x = xvel;
+		v.y = yvel;
 	}
-	
+
+	public void draw(Graphics g, int winWidth, int winHeight) {
+		g.setColor(Color.MAGENTA);
+		g.fillOval((int) (pos.x - radius), (int) (pos.y - radius), (int) (2 * radius), (int) (2 * radius));
+	}
+
+	public BB getBBox() {
+		return new Circle(radius, pos.x, pos.y);
+	}
+
 }

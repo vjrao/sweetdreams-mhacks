@@ -3,11 +3,12 @@ package sweetdreams;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.event.*;
 
 public class Renderer {
-	
+
 	private static final int WIDTH = 400, HEIGHT = 400;
-	
+
 	private final Canvas canvas;
 	private final BufferStrategy strat;
 
@@ -21,24 +22,29 @@ public class Renderer {
 		window.setContentPane(container);
 		window.setVisible(true);
 		window.pack();
-		
-//		canvas.setIgnoreRepaint(true);
+		window.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				System.exit(0);
+			}
+		});
+
+		// canvas.setIgnoreRepaint(true);
 		canvas.createBufferStrategy(2);
 		strat = canvas.getBufferStrategy();
 	}
-	
+
 	public void update(Environment top, Environment bottom) {
-		
+
 		Graphics g = strat.getDrawGraphics();
-		
+
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
-		
+
 		top.draw(g, WIDTH, HEIGHT);
 		bottom.draw(g, WIDTH, HEIGHT);
-		
+
 		g.dispose();
 		strat.show();
-		
+
 	}
 }

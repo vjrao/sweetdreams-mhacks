@@ -2,28 +2,28 @@ package sweetdreams;
 
 import java.util.ArrayList;
 
-import entities.MovingObject;
+import entities.Entity;
 
 import java.awt.Graphics;
 
 public class Environment {
-	
-	private final ArrayList<MovingObject> movingObjs;
-	
+
+	private final ArrayList<Entity> entities;
+
 	public Environment() {
-		movingObjs = new ArrayList<MovingObject>();
+		entities = new ArrayList<Entity>();
 	}
-	
-	public void addElement(MovingObject mo) {
-		movingObjs.add(mo);
+
+	public void addElement(Entity e) {
+		entities.add(e);
 	}
-	
-	public ArrayList<MovingObject> elements() {
-		return movingObjs;
+
+	public ArrayList<Entity> elements() {
+		return entities;
 	}
-	
+
 	public void draw(Graphics g, int winWidth, int winHeight) {
-		for (MovingObject mo : movingObjs)
-			mo.draw(g, winWidth, winHeight);
+		for (Entity e : entities)
+			e.draw(g, winWidth, winHeight);
 	}
 }

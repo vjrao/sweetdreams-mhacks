@@ -3,6 +3,8 @@ package entities;
 import java.awt.Color;
 import java.util.Random;
 
+import physics.AABB;
+
 public class GroundSegment {
 
 	private int blockWidth, blockHeight, height;
