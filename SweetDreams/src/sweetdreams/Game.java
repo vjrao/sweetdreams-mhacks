@@ -26,6 +26,8 @@ public class Game {
 				for (;;) {
 					long tcurr = System.nanoTime();
 					long tdelta = tcurr - t1;
+					// Empirically calculated constant to speed up things a little
+					tdelta *= 4;
 					t1 = tcurr;
 
 					// Updates:

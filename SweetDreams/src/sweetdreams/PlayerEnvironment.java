@@ -4,7 +4,8 @@ import entities.Character;
 
 public class PlayerEnvironment extends Environment {
 
-	private static final double KEYBOARD_IMPULSE = 0.5;
+	private static final double MAX_SPEED = 100, MIN_SPEED = 0;
+	private static final double KEYBOARD_IMPULSE = 5;
 
 	private final Character player;
 
@@ -25,12 +26,12 @@ public class PlayerEnvironment extends Environment {
 	// here do special handling of keys in case some are dropped
 	public void update() {
 		if (keys[0] || keys[4])
-			player.a.y = -5;
+			player.v.y = -10;
 		else if (keys[1] || keys[5])
-			player.v.x -= KEYBOARD_IMPULSE;
+			player.v.x = MIN_SPEED;
 		else if (keys[2] || keys[6])
 			player.v.y += KEYBOARD_IMPULSE;
 		else if (keys[3] || keys[7])
-			player.v.x += KEYBOARD_IMPULSE;
+			player.v.x = MAX_SPEED;
 	}
 }

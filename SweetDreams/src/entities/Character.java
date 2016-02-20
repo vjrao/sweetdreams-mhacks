@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import physics.*;
 
 public class Character extends Sprite {
-	private static final double width = 10, height = 40;
+	private static final double width = 60, height = 100;
 
 	private static Image baseChar;
 	private static Image walkChar1;
