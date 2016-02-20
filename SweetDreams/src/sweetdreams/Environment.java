@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import entities.Entity;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-public class Environment {
+public abstract class Environment {
 
 	private final ArrayList<Entity> entities;
 
@@ -22,8 +22,10 @@ public class Environment {
 		return entities;
 	}
 
-	public void draw(Graphics g, int winWidth, int winHeight) {
+	public void draw(Graphics2D g, int winWidth, int winHeight) {
 		for (Entity e : entities)
 			e.draw(g, winWidth, winHeight);
 	}
+	
+	public abstract void update();
 }

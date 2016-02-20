@@ -1,7 +1,7 @@
 package entities;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import physics.*;
 
@@ -22,7 +22,7 @@ public class Crate extends Entity {
 		v.y = yvel;
 	}
 
-	public void draw(Graphics g, int winWidth, int winHeight) {
+	public void draw(Graphics2D g, int winWidth, int winHeight) {
 		g.setColor(Color.GREEN);
 		g.fillRect((int) (pos.x - width / 2), (int) (pos.y - height / 2), (int) width, (int) height);
 	}

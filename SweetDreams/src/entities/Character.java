@@ -1,5 +1,6 @@
 package entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -24,24 +25,27 @@ public class Character extends Sprite {
 		walkChar1 = Toolkit.getDefaultToolkit().getImage("CharWalking1.png");
 		walkChar2 = Toolkit.getDefaultToolkit().getImage("CharWalking2.png");
 		jumpChar = Toolkit.getDefaultToolkit().getImage("CharJumping.png");
+		pos.x = 100;
+		pos.y = 0;
 	}
-	
+
 	public BB getBBox() {
 		return new AABB(pos.x - width / 2, pos.y - height / 2, pos.x + width / 2, pos.y + height / 2);
 	}
-	
-	public void draw(Graphics g, int winWidth, int winHeight) {
-		Graphics2D g2d = (Graphics2D) g;
-		
-		if (v.y > 0) { curr = 3; }
-		else if (v.x == 0) { curr = 0; }
-		else { // placeholder
-			Random rn = new Random(); 
+
+	public void draw(Graphics2D g, int winWidth, int winHeight) {
+		if (v.y > 0) {
+			curr = 3;
+		} else if (v.x == 0) {
+			curr = 0;
+		} else { // placeholder
+			Random rn = new Random();
 			int rNum = rn.nextInt(2) + 1;
 			curr = rNum;
 		}
-		
-		g2d.drawImage(images[curr], (int)(pos.x - width / 2), (int)(pos.y - height / 2), (int)width, (int)height, null);
+
+		g.drawImage(images[curr], (int) (pos.x - width / 2), (int) (pos.y - height / 2), (int) width, (int) height,
+				null);
 	}
 
 }

@@ -8,12 +8,15 @@ import java.awt.geom.AffineTransform;
 
 public class Renderer {
 
-	private static final int WIDTH = 400, HEIGHT = 400, HALF_HEIGHT = HEIGHT / 2;
+	private static final int WIDTH = 1600, HEIGHT = 900, HALF_HEIGHT = HEIGHT / 2;
 
 	private final Canvas top, bottom;
 	private final BufferStrategy topStrat, bottomStrat;
 
-	public Renderer() {
+	private final PlayerEnvironment keyCallbacks;
+
+	public Renderer(PlayerEnvironment pe) {
+		keyCallbacks = pe;
 		JFrame window = new JFrame("A fantastic game for all the family");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel container = new JPanel();
@@ -29,7 +32,41 @@ public class Renderer {
 		window.pack();
 		window.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
-				
+				handleKeys(e.getKeyCode(), true);
+			}
+
+			public void keyReleased(KeyEvent e) {
+				handleKeys(e.getKeyCode(), false);
+			}
+
+			public void handleKeys(int keycode, boolean state) {
+				switch (keycode) {
+				case KeyEvent.VK_UP:
+					keyCallbacks.setKey(0, state);
+					break;
+				case KeyEvent.VK_LEFT:
+					keyCallbacks.setKey(1, state);
+					break;
+				case KeyEvent.VK_DOWN:
+					keyCallbacks.setKey(2, state);
+					break;
+				case KeyEvent.VK_RIGHT:
+					keyCallbacks.setKey(3, state);
+					break;
+				case KeyEvent.VK_W:
+					keyCallbacks.setKey(4, state);
+					break;
+				case KeyEvent.VK_A:
+					keyCallbacks.setKey(5, state);
+					break;
+				case KeyEvent.VK_S:
+					keyCallbacks.setKey(6, state);
+					break;
+				case KeyEvent.VK_D:
+					keyCallbacks.setKey(7, state);
+					break;
+				}
+
 			}
 		});
 
