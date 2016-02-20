@@ -4,14 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
-public class Rendering {
+public class Renderer {
 	
 	private static final int WIDTH = 400, HEIGHT = 400;
 	
 	private final Canvas canvas;
 	private final BufferStrategy strat;
 
-	public Rendering() {
+	public Renderer() {
 		JFrame window = new JFrame("A fantastic game for all the family");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel container = new JPanel();
@@ -22,6 +22,7 @@ public class Rendering {
 		window.setVisible(true);
 		window.pack();
 		
+//		canvas.setIgnoreRepaint(true);
 		canvas.createBufferStrategy(2);
 		strat = canvas.getBufferStrategy();
 	}
@@ -34,6 +35,9 @@ public class Rendering {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		// for all objects in env, call obj.draw(g, WIDTH, HEIGHT)
+		
+		g.dispose();
+		strat.show();
 		
 	}
 }
