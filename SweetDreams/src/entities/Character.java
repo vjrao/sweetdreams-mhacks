@@ -1,8 +1,10 @@
-package sweetdreams;
+package entities;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+
+import sweetdreams.Sprite;
 
 public class Character extends Sprite {
 	

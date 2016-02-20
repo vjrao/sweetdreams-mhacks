@@ -1,4 +1,4 @@
-package sweetdreams;
+package entities;
 
 public class Crate {
 

@@ -1,7 +1,9 @@
-package sweetdreams;
+package entities;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
+import sweetdreams.Sprite;
 
 public class Virus extends Sprite {
 
