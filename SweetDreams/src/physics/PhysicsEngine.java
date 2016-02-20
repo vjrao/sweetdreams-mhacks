@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import sweetdreams.Environment;
 
 public class PhysicsEngine {
-	public static double AIRDRAG=.005;
+
 	public static void update(Environment env, long tdelta) {
 		double dt = tdelta / (double) 1000000000;
 		ArrayList<Entity> entities = env.elements();
 		int num_entities = entities.size();
 		for (Entity e : entities){
-			e.a=Fnet("gd",env,e).mult(e.invmass);
+			e.a=Fnet("g",env,e).mult(e.invmass);
 			move(e, dt);
 		}
 		for (int i = 0; i < num_entities; i++)
@@ -45,8 +45,8 @@ public class PhysicsEngine {
 		if (name=='g') {
 			return new Vec(0.0,50);
 		}
-		if (name=='d'){
-			return e.v.mult(-1*e.v.mag()*AIRDRAG);
+		if (name='d'){
+			return new e.v.mult(e.v.mag()*AIRDRAG*);
 		}
 		return null;
 	}
