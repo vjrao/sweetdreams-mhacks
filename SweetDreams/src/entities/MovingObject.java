@@ -12,7 +12,9 @@ public abstract class MovingObject implements Drawable {
 	public double m;
 	
 	public MovingObject() {
-		d = v = a = new Vec();
+		d = new Vec();
+		v = new Vec();
+		a = new Vec();
 	}
 	
 	public void draw(Graphics g, int winWidth, int winHeight) {

@@ -52,4 +52,8 @@ public class Vec {
 	public static Vec proj(Vec v1, Vec v2){
 		return Vec.mult(Vec.dot(v1, v2)/Vec.dot(v2,v2),v2);
 	}
+	
+	public String toString() {
+		return "(" + x + ", " + y + ")";
+	}
 }
