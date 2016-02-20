@@ -12,7 +12,7 @@ public class PhysicsEngine {
 		ArrayList<Entity> entities = env.elements();
 		int num_entities = entities.size();
 		for (Entity e : entities){
-			e.a=Fnet("gd",env,e).mult(e.invmass);
+			e.a=Fnet("g",env,e).mult(e.invmass);
 			move(e, dt);
 		}
 		for (int i = 0; i < num_entities; i++)
@@ -44,7 +44,7 @@ public class PhysicsEngine {
 
 	private static Vec force(char name, Environment env, Entity e) {
 		if (name=='g') {
-			return new Vec(0.0,100.0);
+			return new Vec(0.0,10.0/e.invmass);
 		}
 		if (name=='d'){
 			return e.v.mult(-1*e.v.mag()*AIRDRAG);
