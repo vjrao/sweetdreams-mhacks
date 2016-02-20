@@ -1,11 +1,19 @@
-package sweetdreams;
+package entities;
 
 import java.awt.Graphics;
+
+import sweetdreams.Drawable;
+import sweetdreams.Vec;
+
 import java.awt.Color;
 
-public class MovingObject implements Drawable {
-	public Vec d,v,a;
+public abstract class MovingObject implements Drawable {
+	public Vec d, v, a;
 	public double m;
+	
+	public MovingObject() {
+		d = v = a = new Vec();
+	}
 	
 	public void draw(Graphics g, int winWidth, int winHeight) {
 		g.setColor(Color.GREEN);

@@ -1,5 +1,7 @@
 package sweetdreams;
 
+import entities.MovingObject;
+
 public class Collisions {
 	
 	public static void collide(MovingObject m1, MovingObject m2){

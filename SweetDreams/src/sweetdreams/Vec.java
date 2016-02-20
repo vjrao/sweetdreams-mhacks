@@ -15,6 +15,10 @@ public class Vec {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Vec add(Vec o) {
+		
+	}
 
 	public static Vec add(Vec v1, Vec v2) {
 		return new Vec(v1.x + v2.x, v1.y + v2.y);
