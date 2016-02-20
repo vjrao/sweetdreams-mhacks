@@ -1,5 +1,9 @@
 package sweetdreams;
+import java.io.File;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import entities.*;
 import physics.PhysicsEngine;
 
@@ -16,7 +20,6 @@ public class Game {
 		final PlayerEnvironment bottom = new PlayerEnvironment();
 		top.addElement(new Crate(100, 105, 10, 0));
 		top.addElement(new Crate(100, 400, 0, -100));
-		top.addElement(new Ground(1, 5));
 		top.addElement(new Virus(0.2, 2, 0, 90, 15, 0));
 		top.addElement(new Virus(1.0, 2, 400, 120, -100, 0));
 
@@ -55,6 +58,23 @@ public class Game {
 						Thread.sleep(20);
 					} catch (InterruptedException e) {
 					}
+				}
+			}
+		}).start();
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				try{
+					AudioInputStream audioInputStream =
+							AudioSystem.getAudioInputStream(new File("fallill.wav"));
+					Clip clip = AudioSystem.getClip();
+					clip.open(audioInputStream);
+					clip.start();
+				}
+				catch(Exception ex)
+				{
 				}
 			}
 		}).start();
