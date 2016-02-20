@@ -1,7 +1,7 @@
 package entities;
 
 public abstract class Sprite extends Entity {
-
+	
 	public Sprite(double res, double invm) {
 		super(res, invm);
 	}

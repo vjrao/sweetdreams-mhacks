@@ -23,10 +23,16 @@ public class Game {
 					long tcurr = System.nanoTime();
 					long tdelta = tcurr - t1;
 					t1 = tcurr;
+
+					// Updates:
+					// sprite move animation
+					// ground generate/vanish calculation
+					
 					
 					// update player character with key impulses
+					// update viruses with artificial impulses
+					// update player world with virus influence
 					// update virus world with player influence
-					// change player physics
 					
 					PhysicsEngine.update(top, tdelta);
 					PhysicsEngine.update(bottom, tdelta);
