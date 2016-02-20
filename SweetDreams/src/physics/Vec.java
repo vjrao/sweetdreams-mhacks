@@ -75,4 +75,8 @@ public class Vec {
 	public boolean equals(Object o) {
 		return o instanceof Vec && x == ((Vec) o).x && y == ((Vec) o).y;
 	}
+
+	public Vec copy() {
+		return new Vec(x, y);
+	}
 }

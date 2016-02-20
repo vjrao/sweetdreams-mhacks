@@ -17,10 +17,8 @@ public class PhysicsEngine {
 			for (int j = i + 1; j < num_entities; j++) {
 				Entity ei = entities.get(i), ej = entities.get(j);
 				Vec norm = Collisions.intersects(ei, ej);
-				if (norm != null) {
-					System.out.println("Collision");
+				if (norm != null)
 					Collisions.resolveCollision(ei, ej, norm);
-				}
 			}
 	}
 

@@ -42,7 +42,7 @@ public class Collisions {
 	private static Vec intersects(Circle a, Circle b) {
 		double r = a.radius + b.radius;
 		Vec ret = b.pos.minus(a.pos);
-		if (ret.magSquared() > r * r)
+		if (ret.magSquared() < r * r)
 			return ret.unit();
 		else
 			return null;
@@ -54,7 +54,7 @@ public class Collisions {
 		if (xpen > 0) {
 			double ypen = (a.max.y - a.min.y) / 2 + (b.max.y - b.min.y) / 2 - Math.abs(norm.y);
 			if (ypen > 0) {
-				if (xpen > ypen)
+				if (xpen < ypen)
 					if (norm.x < 0)
 						return new Vec(-1, 0);
 					else
@@ -71,7 +71,7 @@ public class Collisions {
 
 	private static Vec intersects(AABB a, Circle b) {
 		Vec norm = b.pos.minus(a.min.avg(a.max));
-		Vec closest = norm;
+		Vec closest = norm.copy();
 		double half_width = (a.max.x - a.min.x) / 2;
 		double half_height = (a.max.y - a.min.y) / 2;
 		closest.x = clamp(-half_width, half_width, closest.x);
@@ -100,9 +100,9 @@ public class Collisions {
 		d = Math.sqrt(d);
 
 		if (inside)
-			return norm.mult(-1);
+			return norm.mult(-1).unit();
 		else
-			return norm;
+			return norm.unit();
 	}
 
 	private static double clamp(double low, double high, double val) {

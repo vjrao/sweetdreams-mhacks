@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import physics.*;
 
 public class Virus extends Sprite {
-	private static final double radius = 10;
+	private static final double radius = 40;
 
 	public Virus(double res, double invm) {
 		super(res, invm);

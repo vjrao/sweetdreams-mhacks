@@ -8,7 +8,7 @@ import physics.*;
 public class Crate extends Entity {
 	private static final double width = 40, height = 40;
 
-	private static final double res = 0.5, invm = 10;
+	private static final double res = 0.5, invm = .25;
 
 	public Crate() {
 		super(res, invm);
