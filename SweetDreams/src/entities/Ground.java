@@ -17,12 +17,9 @@ public class Ground extends Entity {
 	private int renderX, playerX;
 	private Color color;
 
-	public Ground(int width, int height) {
-		this(width, height, DEFAULT_SEGMENTS);
-	}
-
-	public Ground(int width, int height, int numSegments) {
-		super(1.0, 0.0);
+	public Ground(double res, double inv, int width, int height, int numSegments) {
+//		super(1.0, 0.0);
+		super(res, inv);
 		ground = new GroundSegment[numSegments];
 		screenWidth = width;
 		screenHeight = height;
@@ -34,17 +31,17 @@ public class Ground extends Entity {
 
 	public void initializeGroundList() {
 		int i;
-		groundList.add(new GroundSegment(blockWidth, 2));
+		groundList.add(new GroundSegment(restitution, invmass, blockWidth, 2));
 		for (i = 1; i < numSegments + 1; i++) { // creating numSegments + 1
 												// segments
-			groundList.add(new GroundSegment(blockWidth, groundList.get(i - 1).getHeight()));
+			groundList.add(new GroundSegment(restitution, invmass, blockWidth, groundList.get(i - 1).getHeight()));
 		}
 	}
 
 	/* delete first GroundSegment and generate/add new last */
 	public void cycleGroundList() {
 		groundList.removeFirst();
-		groundList.add(new GroundSegment(blockWidth, groundList.getLast().getHeight()));
+		groundList.add(new GroundSegment(restitution, invmass, blockWidth, groundList.getLast().getHeight()));
 	}
 
 	public void update(int deltaPlayerX) {
