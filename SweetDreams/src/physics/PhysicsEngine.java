@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import sweetdreams.Environment;
 
 public class PhysicsEngine {
-	public static double AIRDRAG=.005;
+	public static double AIRDRAG=.001;
 	public static void update(Environment env, long tdelta) {
 		double dt = tdelta / (double) 1000000000;
 		env.update(tdelta);
@@ -44,7 +44,7 @@ public class PhysicsEngine {
 
 	private static Vec force(char name, Environment env, Entity e) {
 		if (name=='g') {
-			return new Vec(0.0,50);
+			return new Vec(0.0,100.0);
 		}
 		if (name=='d'){
 			return e.v.mult(-1*e.v.mag()*AIRDRAG);
