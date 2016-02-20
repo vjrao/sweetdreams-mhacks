@@ -45,6 +45,9 @@ public class PhysicsEngine {
 		if (name=='g') {
 			return new Vec(0.0,50);
 		}
+		if (name='d'){
+			return new e.v.mult(e.v.mag()*AIRDRAG*);
+		}
 		return null;
 	}
 }
