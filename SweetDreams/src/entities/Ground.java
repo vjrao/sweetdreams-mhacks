@@ -8,6 +8,7 @@ import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
@@ -18,8 +19,10 @@ public class Ground extends Entity {
 	private static final int DEFAULT_SEGMENTS = 40;
 	private Image groundImage = Toolkit.getDefaultToolkit().getImage("groundImage.jpg");
 	private GroundSegment ground[];
+	private LinkedList<GroundSegment> groundList = new LinkedList<GroundSegment>();
 	private int numSegments;
 	private int screenWidth, screenHeight, blockWidth;
+	private int renderX, playerX;
 	private Color color;
 
 	public Ground(int width, int height) {
@@ -32,17 +35,34 @@ public class Ground extends Entity {
 		screenWidth = width;
 		screenHeight = height;
 		blockWidth = screenWidth / numSegments;
-		initializeGroundArray();
+		renderX = 0; // where in the canvas the ground will start rendering
+		playerX = screenWidth/3;
+		initializeGroundList();
 	}
 
-	public void initializeGroundArray() {
+	public void initializeGroundList() {
 		int i;
-		ground[0] = new GroundSegment(blockWidth, 2);
-		for (i = 1; i < numSegments; i++) {
-			ground[i] = new GroundSegment(blockWidth, ground[i - 1].getHeight());
+		groundList.add(new GroundSegment(blockWidth, 2));
+		for (i = 1; i < numSegments + 1; i++) {	// creating numSegments + 1 segments 
+			groundList.add(new GroundSegment(blockWidth, groundList.get(i-1).getHeight()));
 		}
 	}
+	
+	/* delete first GroundSegment and generate/add new last */
+	public void cycleGroundList() {
+		groundList.removeFirst();
+		groundList.add(new GroundSegment(blockWidth, groundList.getLast().getHeight()));
+	}
 
+	public void update(int deltaPlayerX) {
+		playerX += deltaPlayerX;
+		renderX -= deltaPlayerX;
+		if (renderX >= blockWidth) {
+			cycleGroundList();
+			renderX += blockWidth;
+		}
+	}
+	
 	public void draw(Graphics g) {
 		int i;
 		Graphics2D g2d = (Graphics2D) g;
@@ -53,7 +73,7 @@ public class Ground extends Entity {
 
 		/* fill in ground segments */
 		for (i = 0; i < numSegments; i++) {
-			g2d.drawImage(groundImage, i * blockWidth, screenHeight - (ground[i].getHeight() * blockWidth), blockWidth,
+			g2d.drawImage(groundImage, renderX + i * blockWidth, screenHeight - (ground[i].getHeight() * blockWidth), blockWidth,
 					ground[i].getHeight() * blockWidth, null);
 		}
 		g2d.finalize();
