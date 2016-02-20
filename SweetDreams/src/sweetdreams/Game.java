@@ -8,7 +8,7 @@ public class Game {
 	public static void main(String[] args) {
 
 		System.setProperty("sun.java2d.opengl", "true");
-		System.out.println("Hello, world! Trying to actually run a game here, if you would believe it!");
+		System.out.println("Hello, world! Trying to actually run a game here, amazingly enough!");
 
 		final Environment top = new Environment(), bottom = new Environment();
 		top.addElement(new Crate(100, 105, 10, 0));
@@ -23,6 +23,11 @@ public class Game {
 					long tcurr = System.nanoTime();
 					long tdelta = tcurr - t1;
 					t1 = tcurr;
+					
+					// update player character with key impulses
+					// update virus world with player influence
+					// change player physics
+					
 					PhysicsEngine.update(top, tdelta);
 					PhysicsEngine.update(bottom, tdelta);
 					try {
