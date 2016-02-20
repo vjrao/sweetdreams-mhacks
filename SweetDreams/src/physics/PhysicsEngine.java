@@ -8,7 +8,7 @@ public class PhysicsEngine {
 	public static double AIRDRAG=.001;
 	public static void update(Environment env, long tdelta) {
 		double dt = tdelta / (double) 1000000000;
-		env.update();
+		env.update(tdelta);
 		ArrayList<Entity> entities = env.elements();
 		int num_entities = entities.size();
 		for (Entity e : entities){
