@@ -8,7 +8,7 @@ public class Collisions {
 	private static final double SINK_CORRECTION_THRESHOLD = 0.01;
 
 	public static void resolveCollision(Entity a, Entity b) {
-		Vec rv = a.v.minus(b.v), norm = a.pos.minus(b.pos).unit();
+		Vec rv = b.v.minus(a.v), norm = b.pos.minus(a.pos).unit();
 		double nvel = rv.dot(norm);
 		if (nvel > 0)
 			return;
@@ -17,7 +17,7 @@ public class Collisions {
 		impScal /= a.invmass + b.invmass;
 		Vec impVec = norm.mult(impScal);
 		a.v = a.v.minus(impVec.mult(a.invmass));
-		b.v = b.v.minus(impVec.mult(b.invmass));
+		b.v = b.v.add(impVec.mult(b.invmass));
 	}
 
 	// private void sinkCorrect(Entity a, Entity b) {
