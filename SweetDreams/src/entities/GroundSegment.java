@@ -1,7 +1,9 @@
-package sweetdreams;
+package entities;
 
 import java.awt.Color;
 import java.util.Random;
+
+import physics.AABB;
 
 public class GroundSegment {
 
