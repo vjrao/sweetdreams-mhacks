@@ -39,21 +39,25 @@ public class Renderer {
 		bottomStrat = bottom.getBufferStrategy();
 	}
 
+	private static final int BORDER = 8;
+	
 	public void update(Environment top, Environment bottom) {
 
 		Graphics g = topStrat.getDrawGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HALF_HEIGHT);
 		top.draw(g, WIDTH, HEIGHT);
-		bottom.draw(g, WIDTH, HALF_HEIGHT);
+		g.setColor(Color.WHITE);
+		g.fillRect(0, HALF_HEIGHT - BORDER / 2, WIDTH, BORDER / 2);
 		g.dispose();
 		topStrat.show();
 
 		g = bottomStrat.getDrawGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HALF_HEIGHT);
-		top.draw(g, WIDTH, HEIGHT);
 		bottom.draw(g, WIDTH, HALF_HEIGHT);
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, WIDTH, BORDER / 2);
 		g.dispose();
 		bottomStrat.show();
 		
