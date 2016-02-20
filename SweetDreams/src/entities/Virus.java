@@ -12,6 +12,14 @@ public class Virus extends Sprite {
 		super(res, invm);
 	}
 
+	public Virus(double res, double invm, double x, double y, double xvel, double yvel) {
+		super(res, invm);
+		pos.x = x;
+		pos.y = y;
+		v.x = xvel;
+		v.y = yvel;
+	}
+
 	public void draw(Graphics g, int winWidth, int winHeight) {
 		g.setColor(Color.MAGENTA);
 		g.fillOval((int) (pos.x - radius), (int) (pos.y - radius), (int) (2 * radius), (int) (2 * radius));

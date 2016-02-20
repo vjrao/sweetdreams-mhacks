@@ -7,8 +7,8 @@ public class Collisions {
 	private static final double SINK_CORRECTION_FACTOR = 0.2;
 	private static final double SINK_CORRECTION_THRESHOLD = 0.01;
 
-	public static void resolveCollision(Entity a, Entity b) {
-		Vec rv = b.v.minus(a.v), norm = b.pos.minus(a.pos).unit();
+	public static void resolveCollision(Entity a, Entity b, Vec norm) {
+		Vec rv = b.v.minus(a.v);
 		double nvel = rv.dot(norm);
 		if (nvel > 0)
 			return;
@@ -26,51 +26,92 @@ public class Collisions {
 	// a.d.minus(pendept)
 	// }
 
-	public static boolean intersects(Entity ea, Entity eb) {
+	public static Vec intersects(Entity ea, Entity eb) {
 		BB a = ea.getBBox(), b = eb.getBBox();
 		if (a instanceof Circle)
 			if (b instanceof Circle)
 				return intersects((Circle) a, (Circle) b);
 			else
-				return intersects((Circle) a, (AABB) b);
+				return intersects((AABB) b, (Circle) a);
 		else if (b instanceof Circle)
-			return intersects((Circle) b, (AABB) a);
+			return intersects((AABB) a, (Circle) b);
 		else
 			return intersects((AABB) a, (AABB) b);
 	}
 
-	public static boolean intersects(Circle a, Circle b) {
+	private static Vec intersects(Circle a, Circle b) {
 		double r = a.radius + b.radius;
-		return b.pos.minus(a.pos).magSquared() > r * r;
+		Vec ret = b.pos.minus(a.pos);
+		if (ret.magSquared() > r * r)
+			return ret.unit();
+		else
+			return null;
 	}
 
-	public static boolean intersects(AABB a, AABB b) {
-		return a.min.x < b.max.x && a.max.x > b.min.x && a.min.y < b.max.y && a.max.y > b.min.y;
+	private static Vec intersects(AABB a, AABB b) {
+		Vec norm = b.min.minus(a.min);
+		double xpen = (a.max.x - a.min.x) / 2 + (b.max.x - b.min.x) / 2 - Math.abs(norm.x);
+		if (xpen > 0) {
+			double ypen = (a.max.y - a.min.y) / 2 + (b.max.y - b.min.y) / 2 - Math.abs(norm.y);
+			if (ypen > 0) {
+				if (xpen > ypen)
+					if (norm.x < 0)
+						return new Vec(-1, 0);
+					else
+						return new Vec(1, 0);
+				else if (norm.y < 0)
+					return new Vec(0, -1);
+				else
+					return new Vec(0, 1);
+			} else
+				return null;
+		} else
+			return null;
 	}
 
-	public static boolean intersects(Circle a, AABB b) {
-		if (a.pos.x > b.min.x && a.pos.x < b.max.x || a.pos.y > b.min.y && a.pos.y < b.max.y)
-			return true;
-		double rsquare = a.radius * a.radius;
-		return b.min.minus(a.pos).magSquared() < rsquare || b.max.minus(a.pos).magSquared() < rsquare
-				|| new Vec(b.min.x, b.max.y).minus(a.pos).magSquared() < rsquare
-				|| new Vec(b.max.x, b.min.y).minus(a.pos).magSquared() < rsquare;
+	private static Vec intersects(AABB a, Circle b) {
+		Vec norm = b.pos.minus(a.min.avg(a.max));
+		Vec closest = norm;
+		double half_width = (a.max.x - a.min.x) / 2;
+		double half_height = (a.max.y - a.min.y) / 2;
+		closest.x = clamp(-half_width, half_width, closest.x);
+		closest.y = clamp(-half_height, half_height, closest.y);
+		boolean inside = false;
+		if (norm.equals(closest)) {
+			inside = true;
+			if (Math.abs(norm.x) > Math.abs(norm.y))
+				if (closest.x > 0)
+					closest.x = half_width;
+				else
+					closest.x = -half_width;
+			else if (closest.y > 0)
+				closest.y = half_height;
+			else
+				closest.y = -half_height;
+		}
+
+		Vec normal = norm.minus(closest);
+		double d = normal.magSquared();
+		double r = b.radius;
+
+		if (d > r * r && !inside)
+			return null;
+
+		d = Math.sqrt(d);
+
+		if (inside)
+			return norm.mult(-1);
+		else
+			return norm;
 	}
 
-	// private static class Manifold {
-	// Entity a, b;
-	// double pen;
-	// Vec norm;
-	//
-	// public Manifold(){}
-	//
-	// public Manifold(Entity a, Entity b, double penetration, Vec normal) {
-	// this.a = a;
-	// this.b = b;
-	// pen = penetration;
-	// norm = normal;
-	// }
-	// }
-	//
+	private static double clamp(double low, double high, double val) {
+		if (val < low)
+			return low;
+		else if (val > high)
+			return high;
+		else
+			return val;
+	}
 
 }

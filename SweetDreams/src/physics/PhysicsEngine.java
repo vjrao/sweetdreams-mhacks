@@ -12,15 +12,18 @@ public class PhysicsEngine {
 		int num_entities = entities.size();
 		for (Entity e : entities)
 			move(e, dt);
-		
-		for (int i = 0; i < num_entities; i ++)
-			for(int j = i + 1; j < num_entities; j ++) {
+
+		for (int i = 0; i < num_entities; i++)
+			for (int j = i + 1; j < num_entities; j++) {
 				Entity ei = entities.get(i), ej = entities.get(j);
-				if (Collisions.intersects(ei, ej))
-					Collisions.resolveCollision(ei, ej);
+				Vec norm = Collisions.intersects(ei, ej);
+				if (norm != null) {
+					System.out.println("Collision");
+					Collisions.resolveCollision(ei, ej, norm);
+				}
 			}
 	}
-	
+
 	public static void move(Entity e, double dt) {
 		e.v = e.v.add(e.a.mult(dt));
 		e.pos = e.pos.add(e.v.mult(dt));

@@ -10,9 +10,9 @@ public class Game {
 		System.out.println("Hello, world! Trying to actually run a game here, if you would believe it!");
 
 		final Environment top = new Environment(), bottom = new Environment();
-		top.addElement(new Crate(100, 100, 10, 0));
+		top.addElement(new Crate(100, 105, 10, 0));
 		top.addElement(new Crate(400, 100, -100, 0));
-		top.addElement(new Virus(0.2, 2));
+		// top.addElement(new Virus(0.2, 2, 0, 90, 0, 0));
 
 		new Thread(new Runnable() {
 			public void run() {
