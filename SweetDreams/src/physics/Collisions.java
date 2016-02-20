@@ -7,8 +7,8 @@ public class Collisions {
 	private static final double SINK_CORRECTION_FACTOR = 0.2;
 	private static final double SINK_CORRECTION_THRESHOLD = 0.01;
 
-	public void resolveCollision(Entity a, Entity b) {
-		Vec rv = a.v.minus(b.v), norm = a.d.minus(b.d).unit();
+	public static void resolveCollision(Entity a, Entity b) {
+		Vec rv = a.v.minus(b.v), norm = a.pos.minus(b.pos).unit();
 		double nvel = rv.dot(norm);
 		if (nvel > 0)
 			return;
@@ -26,7 +26,7 @@ public class Collisions {
 	// a.d.minus(pendept)
 	// }
 
-	public boolean intersects(Entity ea, Entity eb) {
+	public static boolean intersects(Entity ea, Entity eb) {
 		BB a = ea.getBBox(), b = eb.getBBox();
 		if (a instanceof Circle)
 			if (b instanceof Circle)
@@ -39,16 +39,16 @@ public class Collisions {
 			return intersects((AABB) a, (AABB) b);
 	}
 
-	public boolean intersects(Circle a, Circle b) {
+	public static boolean intersects(Circle a, Circle b) {
 		double r = a.radius + b.radius;
 		return b.pos.minus(a.pos).magSquared() > r * r;
 	}
 
-	public boolean intersects(AABB a, AABB b) {
+	public static boolean intersects(AABB a, AABB b) {
 		return a.min.x < b.max.x && a.max.x > b.min.x && a.min.y < b.max.y && a.max.y > b.min.y;
 	}
 
-	public boolean intersects(Circle a, AABB b) {
+	public static boolean intersects(Circle a, AABB b) {
 		if (a.pos.x > b.min.x && a.pos.x < b.max.x || a.pos.y > b.min.y && a.pos.y < b.max.y)
 			return true;
 		double rsquare = a.radius * a.radius;

@@ -15,7 +15,7 @@ public class Virus extends Sprite {
 	}
 
 	public BB getBBox() {
-		return new Circle(radius, d.x, d.y);
+		return new Circle(radius, pos.x, pos.y);
 	}
 	
 }
