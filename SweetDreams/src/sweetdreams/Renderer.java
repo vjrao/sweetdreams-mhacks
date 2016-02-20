@@ -8,7 +8,7 @@ import java.awt.geom.AffineTransform;
 
 public class Renderer {
 
-	private static final int WIDTH = 400, HEIGHT = 400, HALF_HEIGHT = 200;
+	private static final int WIDTH = 400, HEIGHT = 400, HALF_HEIGHT = HEIGHT / 2;
 
 	private final Canvas top, bottom;
 	private final BufferStrategy topStrat, bottomStrat;
@@ -24,12 +24,12 @@ public class Renderer {
 		bottom = new Canvas();
 		bottom.setPreferredSize(new Dimension(WIDTH, HALF_HEIGHT));
 		container.add(bottom, BorderLayout.SOUTH);
-		window.setContentPane(container);
+		window.add(container);
 		window.setVisible(true);
 		window.pack();
 		window.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
-				System.exit(0);
+				
 			}
 		});
 
