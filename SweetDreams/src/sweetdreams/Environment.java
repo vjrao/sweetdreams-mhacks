@@ -27,5 +27,5 @@ public abstract class Environment {
 			e.draw(g, winWidth, winHeight);
 	}
 	
-	public abstract void update();
+	public abstract void update(long tdelta);
 }
