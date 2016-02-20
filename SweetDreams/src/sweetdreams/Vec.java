@@ -1,3 +1,5 @@
+package sweetdreams;
+
 public class Vec{
 	public double x,y;
 	public Vec(){
