@@ -41,7 +41,9 @@ public class Character extends Sprite {
 		
 		long millis = System.currentTimeMillis() % 1000;
 		
-		if (v.y > 5) { curr = 3; } 
+		System.out.println(v.y);
+		
+		if (v.y > 3) { curr = 3; } 
 		else if (v.x == 0) { curr = 0; } 
 		else if ((millis/170)%2 == 0) { curr = 1; }
 		else { curr = 2; }
