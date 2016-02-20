@@ -4,7 +4,7 @@ import entities.Character;
 
 public class PlayerEnvironment extends Environment {
 
-	private static final double KEYBOARD_IMPULSE = 0.01;
+	private static final double KEYBOARD_IMPULSE = 0.5;
 
 	private final Character player;
 
