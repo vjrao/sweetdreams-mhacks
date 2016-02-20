@@ -27,14 +27,15 @@ public class Renderer {
 		strat = canvas.getBufferStrategy();
 	}
 	
-	public void update(Object env) {
+	public void update(Environment top, Environment bottom) {
 		
 		Graphics g = strat.getDrawGraphics();
 		
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		// for all objects in env, call obj.draw(g, WIDTH, HEIGHT)
+		top.draw(g, WIDTH, HEIGHT);
+		bottom.draw(g, WIDTH, HEIGHT);
 		
 		g.dispose();
 		strat.show();
