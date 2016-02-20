@@ -1,4 +1,4 @@
-package sweetdreams;
+package physics;
 
 public class Vec {
 	public double x, y;
@@ -20,12 +20,20 @@ public class Vec {
 		return new Vec(x + o.x, y + o.y);
 	}
 	
+	public Vec minus(Vec o) {
+		return new Vec(x - o.x, y - o.y);
+	}
+	
 	public Vec mult(double scalar) {
 		return new Vec(x * scalar, y * scalar);
 	}
 	
-	public Vec dot(Vec o) {
-		return new Vec(x * o.x, y * o.y);
+	public double dot(Vec o) {
+		return x * o.x + y * o.y;
+	}
+	
+	public Vec unit() {
+		return mult(1 / mag());
 	}
 	
 	public double magSquared() {
@@ -35,7 +43,7 @@ public class Vec {
 	public double mag() {
 		return Math.sqrt(magSquared());
 	}
-
+	
 	public static Vec add(Vec v1, Vec v2) {
 		return new Vec(v1.x + v2.x, v1.y + v2.y);
 	}

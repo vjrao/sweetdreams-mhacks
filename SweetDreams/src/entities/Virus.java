@@ -1,18 +1,21 @@
 package entities;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 
-import sweetdreams.Sprite;
+import physics.*;
 
 public class Virus extends Sprite {
+	private static final double radius = 20;
 
-	public Virus(int startX, int startY) {
-		super(startX, startY);
+	public Virus(double res, double invm) {
+		super(res, invm);
 	}
-	
-	public void draw(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
+
+	public void draw(Graphics g, int winWidth, int winHeight) {
+	}
+
+	public BB getBBox() {
+		return new Circle(radius, d.x, d.y);
 	}
 	
 }

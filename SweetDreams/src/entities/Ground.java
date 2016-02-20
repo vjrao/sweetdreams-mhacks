@@ -11,6 +11,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import physics.AABB;
+
 public class Ground {
 	private final int DEFAULT_SEGMENTS = 40;
 	private Image groundImage = Toolkit.getDefaultToolkit().getImage("groundImage.jpg");

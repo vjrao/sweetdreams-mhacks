@@ -1,6 +1,7 @@
 package sweetdreams;
 
-import entities.Circle;
+import entities.Crate;
+import physics.PhysicsEngine;
 
 public class Game {
 
@@ -9,7 +10,7 @@ public class Game {
 		System.out.println("Hello, world! Trying to actually run a game here, if you would believe it!");
 
 		final Environment top = new Environment(), bottom = new Environment();
-		top.addElement(new Circle());
+		top.addElement(new Crate());
 
 		new Thread(new Runnable() {
 			public void run() {
