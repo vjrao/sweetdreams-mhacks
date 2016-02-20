@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.event.*;
+import java.awt.geom.AffineTransform;
 
 public class Renderer {
 
@@ -40,26 +41,35 @@ public class Renderer {
 	}
 
 	private static final int BORDER = 8;
-	
+
 	public void update(Environment top, Environment bottom) {
 
-		Graphics g = topStrat.getDrawGraphics();
+		int width = this.top.getWidth(), height = this.top.getHeight();
+
+		AffineTransform scaled = AffineTransform.getScaleInstance(width / (double) WIDTH,
+				height / (double) HALF_HEIGHT);
+
+		Graphics2D g = (Graphics2D) topStrat.getDrawGraphics();
+		AffineTransform init = g.getTransform();
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, WIDTH, HALF_HEIGHT);
-		top.draw(g, WIDTH, HEIGHT);
+		g.fillRect(0, 0, width, height);
+		g.setTransform(scaled);
+		top.draw(g, WIDTH, HALF_HEIGHT);
+		g.setTransform(init);
 		g.setColor(Color.WHITE);
-		g.fillRect(0, HALF_HEIGHT - BORDER / 2, WIDTH, BORDER / 2);
+		g.fillRect(0, height - BORDER / 2, width, BORDER / 2);
 		g.dispose();
 		topStrat.show();
 
-		g = bottomStrat.getDrawGraphics();
+		g = (Graphics2D) bottomStrat.getDrawGraphics();
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, WIDTH, HALF_HEIGHT);
+		g.fillRect(0, 0, width, height);
+		g.setTransform(scaled);
 		bottom.draw(g, WIDTH, HALF_HEIGHT);
+		g.setTransform(init);
 		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, WIDTH, BORDER / 2);
+		g.fillRect(0, 0, width, BORDER / 2);
 		g.dispose();
 		bottomStrat.show();
-		
 	}
 }
