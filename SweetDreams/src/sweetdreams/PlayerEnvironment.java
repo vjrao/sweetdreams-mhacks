@@ -24,9 +24,10 @@ public class PlayerEnvironment extends Environment {
 	}
 
 	// here do special handling of keys in case some are dropped
-	public void update() {
+	public void update(long tdelta) {
+		player.update(tdelta);
 		if (keys[0] || keys[4])
-			player.v.y = -10;
+			player.v.y = -20;
 		else if (keys[1] || keys[5])
 			player.v.x = MIN_SPEED;
 		else if (keys[2] || keys[6])

@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import sweetdreams.Environment;
 
 public class PhysicsEngine {
+
 	public static double AIRDRAG = .001;
 	public static double GRAVITY = 200;
 
 	public static void update(Environment env, long tdelta) {
 		double dt = tdelta / (double) 1000000000;
-		env.update();
+		env.update(tdelta);
 		ArrayList<Entity> entities = env.elements();
 		int num_entities = entities.size();
 		for (Entity e : entities) {
@@ -45,12 +46,11 @@ public class PhysicsEngine {
 	}
 
 	private static Vec force(char name, Environment env, Entity e) {
-		if (name == 'g') {
+		if (name == 'g')
 			return new Vec(0.0, GRAVITY);
-		}
-		if (name == 'd') {
+		else if (name == 'd')
 			return e.v.mult(-1 * e.v.mag() * AIRDRAG);
-		}
-		return null;
+		else
+			return null;
 	}
 }
