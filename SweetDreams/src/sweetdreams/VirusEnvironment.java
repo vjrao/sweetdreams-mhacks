@@ -25,11 +25,13 @@ public class VirusEnvironment extends Environment {
 		for (Virus v : virii) {
 
 			// Establish a target if necessary
-			if (v.target != null) {
+			if (v.target == null || v.target.attackers == 0xf) {
 				CommandBlock closest = null;
 				double mindist = Integer.MAX_VALUE;
 				int targetSide = -1;
 				for (CommandBlock cb : cblocks) {
+					if (cb.attackers == 0xf)
+						return;
 					double dist = v.pos.x - cb.pos.x;
 					if ((closest == null || Math.abs(dist) < Math.abs(mindist))) {
 						closest = cb;
@@ -57,10 +59,16 @@ public class VirusEnvironment extends Environment {
 
 			// ATTACK THE TARGET
 			if (v.target == null) {
-				// move forward and jump 
+				v.accelerate(1);
+				v.jump();
 			} else {
-				if (dist < 0 && targetSide == 1)
-					v.v.x += 
+				double dist = v.pos.x - v.target.pos.x;
+				if (dist < 0 && v.targetSide == 2)
+					v.accelerate(1);
+				else if (dist > 0 && v.targetSide == 8)
+					v.accelerate(-1);
+				else if (Math.abs(dist) < 50)
+					v.jump();
 			}
 		}
 	}
