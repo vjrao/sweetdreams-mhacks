@@ -4,8 +4,8 @@ import entities.Entity;
 
 public class Collisions {
 
-	private static final double SINK_CORRECTION_FACTOR = 0.1;
-	private static final double SINK_CORRECTION_THRESHOLD = 0.01;
+	private static final double SINK_CORRECTION_FACTOR = 0.01;
+	private static final double SINK_CORRECTION_THRESHOLD = 0.08;
 
 	public static void resolveCollision(Entity a, Entity b, Vec norm) {
 		Vec rv = b.v.minus(a.v);
