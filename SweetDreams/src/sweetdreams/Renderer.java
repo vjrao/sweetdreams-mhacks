@@ -68,6 +68,9 @@ public class Renderer {
 				case KeyEvent.VK_D:
 					keyCallbacks.setKey(7, state);
 					break;
+				case KeyEvent.VK_SPACE:
+					keyCallbacks.setKey(8, state);
+					break;
 				}
 
 			}

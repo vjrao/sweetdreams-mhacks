@@ -7,7 +7,7 @@ import entities.*;
 import physics.PhysicsEngine;
 
 public class Game {
-
+	public static String rules="f";
 	public static void main(String[] args) {
 
 		System.setProperty("sun.java2d.opengl", "true");
@@ -19,8 +19,9 @@ public class Game {
 		final VirusEnvironment top = new VirusEnvironment();
 		final PlayerEnvironment bottom = new PlayerEnvironment();
 
-		bottom.addElement(new Ground(1.0, 0, Renderer.WIDTH, Renderer.HALF_HEIGHT, 40));
-		bottom.addElement(new Crate(90, 0, 0, 0));
+		bottom.addElement(new Ground(1.0, 0, Renderer.WIDTH, Renderer.HALF_HEIGHT, 60));
+		bottom.addElement(new Crate(400, 40, 0, 0));
+		bottom.addElement(new Crate(600,40,0,0));
 
 		new Thread(new Runnable() {
 			public void run() {
@@ -42,8 +43,8 @@ public class Game {
 					// update player world with virus influence
 					// update virus world with player influence
 
-					PhysicsEngine.update(top, tdelta / 400);
-					PhysicsEngine.update(bottom, tdelta);
+					rules=PhysicsEngine.update(top, tdelta,rules);
+					rules=PhysicsEngine.update(bottom, tdelta,rules);
 					try {
 						Thread.sleep(20);
 					} catch (InterruptedException e) {

@@ -61,7 +61,7 @@ public class Vec {
 	}
 
 	public static double dot(Vec v1, Vec v2) {
-		return v1.x * v2.x + v1.y + v2.y;
+		return v1.x * v2.x + v1.y * v2.y;
 	}
 
 	public static Vec proj(Vec v1, Vec v2) {

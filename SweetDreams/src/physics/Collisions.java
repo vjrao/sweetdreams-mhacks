@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 import entities.Entity;
+import entities.Ground;
 
 public class Collisions {
 
@@ -32,12 +33,6 @@ public class Collisions {
 		a.pos = a.pos.add(correction.mult(-1 * a.invmass));
 		b.pos = b.pos.add(correction.mult(b.invmass));
 	}
-
-	// private void sinkCorrect(Entity a, Entity b) {
-	// Vec pendepth = a.d.minus(b.d).mult(SINK_CORRECTION_FACTOR/ (a.invmass +
-	// b.invmass));
-	// a.d.minus(pendept)
-	// }
 
 	public static Vec intersects(Entity ea, Entity eb) {
 		BB a = ea.getBBox(), b = eb.getBBox();
@@ -70,9 +65,13 @@ public class Collisions {
 		if (r.isEmpty())
 			return null;
 		else if (r.getWidth() > r.getHeight())
-			return new Vec(0, -1);
+			if (r1.getMinY()>r2.getMinY()){
+				return new Vec(0, -1);
+			}
+			else return new Vec(0, 1);
 		else if (r.getHeight() > r.getWidth())
-			return new Vec(-1, 0);
+			if (r1.getMinX()>r2.getMinX())return new Vec(-1, 0);
+			else return new Vec(1, 0);
 		else
 			return null;
 		/*

@@ -8,10 +8,9 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 
 import physics.*;
-
 public class Ground extends Entity {
 	private static final int DEFAULT_SEGMENTS = 40;
-	private static final String IMAGE_PATH = "src/sweetdreams/Images/brick-tile-darker.jpg";
+	private static final String IMAGE_PATH = "src/sweetdreams/Images/walltexture.png";
 	private Image groundImage;
 	private GroundSegment ground[];
 	private LinkedList<GroundSegment> groundList = new LinkedList<GroundSegment>();
@@ -23,6 +22,7 @@ public class Ground extends Entity {
 	public Ground(double res, double inv, int width, int height, int numSegments) {
 		// super(1.0, 0.0);
 		super(res, inv);
+		this.numSegments=numSegments;
 		ground = new GroundSegment[numSegments];
 		screenWidth = width * 2;
 		screenHeight = height;
@@ -58,12 +58,12 @@ public class Ground extends Entity {
 	}
 
 	public void update(int deltaPlayerX) {
-		playerX += deltaPlayerX;
-		renderX -= deltaPlayerX;
-		if (renderX >= blockWidth) {
-			cycleGroundList();
-			renderX += blockWidth;
-		}
+//		playerX += deltaPlayerX;
+//		renderX -= deltaPlayerX;
+//		if (renderX >= blockWidth) {
+//			cycleGroundList();
+//			renderX += blockWidth;
+//		}
 	}
 
 	public void draw(Graphics2D g, int width, int height) {
@@ -75,13 +75,13 @@ public class Ground extends Entity {
 
 		/* fill in ground segments */
 		for (i = 0; i < numSegments; i++) {
-			g.drawImage(groundImage, renderX + i * blockWidth, screenHeight - (ground[i].getHeight() * blockWidth),
-					blockWidth, ground[i].getHeight() * blockWidth, null);
+			g.drawImage(groundImage, (int)(pos.x + i * blockWidth),(int)( pos.y),
+					blockWidth, blockWidth, null);
 		}
 
 		/* testing */
-		g.setColor(Color.GREEN);
-		g.fillRect(0, screenHeight - blockWidth, screenWidth, blockWidth);
+//		g.setColor(Color.GREEN);
+//		g.fillRect(0, screenHeight - blockWidth, screenWidth, blockWidth);
 
 	}
 

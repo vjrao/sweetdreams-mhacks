@@ -9,7 +9,8 @@ import javax.imageio.ImageIO;
 
 import physics.*;
 
-public class Character extends Sprite {
+public class PCharacter extends Sprite {
+	private int dir=-1;
 	private static final double width = 60, height = 100;
 
 	private static Image baseChar;
@@ -19,7 +20,7 @@ public class Character extends Sprite {
 	private static Image images[] = { baseChar, walkChar1, walkChar2, jumpChar };
 	private static int curr = 0;
 
-	public Character(double res, double invm) {
+	public PCharacter(double res, double invm) {
 		super(res, invm);
 		try {
 			images[0] = ImageIO.read(new File("src/sweetdreams/Images/CharRest.png"));
@@ -31,10 +32,11 @@ public class Character extends Sprite {
 		}
 		pos.x = 200; // center
 		pos.y = 0; // center
+		v.y=30;
 	}
 
 	public BB getBBox() {
-		return new AABB(pos.x - width / 2, pos.y - height / 2, pos.x + width / 2, pos.y + height / 2);
+		return new AABB(pos.x - width / 4, pos.y - height / 2, pos.x + width / 4, pos.y + height / 2);
 	}
 
 	public void update(long tdelta) {
@@ -42,7 +44,7 @@ public class Character extends Sprite {
 		long millis = System.currentTimeMillis() % 1000;
 
 		// cause of standing in midair bug?
-		if (v.y < -3 || v.y > 3)
+		if (!onsurface)
 			curr = 3;
 		else if (Math.abs(v.x) <= PhysicsEngine.MOVEMENT_EPSILON)
 			curr = 0;
@@ -56,10 +58,24 @@ public class Character extends Sprite {
 		if (v.x < 0) {
 			g.drawImage(images[curr], (int) (pos.x - width / 2 + width), (int) (pos.y - height / 2), (int) (-1 * width),
 					(int) height, null);
-		} else {
+			dir=1;
+		} else if (v.x>0){
 			g.drawImage(images[curr], (int) (pos.x - width / 2), (int) (pos.y - height / 2), (int) width, (int) height,
 					null);
+			dir=-1;
 		}
+		else{
+			if (dir==-1) {
+				g.drawImage(images[curr], (int) (pos.x - width / 2), (int) (pos.y - height / 2), (int) width, (int) height,
+						null);
+			}
+			else{
+				g.drawImage(images[curr], (int) (pos.x - width / 2 + width), (int) (pos.y - height / 2), (int) (-1 * width),
+						(int) height, null);
+			}
+		}
+		g.setColor(Color.red);
+		//g.drawRect((int)(pos.x - width / 2),(int) (pos.y - height / 2),(int) (width), (int)(height));
 
 		// g.setColor(Color.RED);
 		// g.drawRect((int) (pos.x - width / 2), (int) (pos.y - height / 2),

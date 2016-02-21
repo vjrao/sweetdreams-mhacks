@@ -6,14 +6,15 @@ import java.util.ArrayList;
 public class VirusEnvironment extends Environment {
 
 	public VirusEnvironment() {
-		for (int i = 0; i < 10; i++)
-			addElement(new Virus(Math.random() / 2 + 0.5, Math.random() * 2));
+//		for (int i = 0; i < 10; i++)
+//			addElement(new Virus(Math.random() / 2 + 0.5, Math.random() * 2));
 	}
 
 	/**
 	 * Viruses plan out their moves Note: max velocity before not stopping is 50
+	 * @return 
 	 */
-	public void update(long tdelta) {
+	public String update(long tdelta,String rules) {
 		ArrayList<Virus> virii = new ArrayList<Virus>();
 		ArrayList<CommandBlock> cblocks = new ArrayList<CommandBlock>();
 		for (Entity e : elements())
@@ -31,7 +32,7 @@ public class VirusEnvironment extends Environment {
 				int targetSide = -1;
 				for (CommandBlock cb : cblocks) {
 					if (cb.attackers == 0xf)
-						return;
+						return rules;
 					double dist = v.pos.x - cb.pos.x;
 					if ((closest == null || Math.abs(dist) < Math.abs(mindist))) {
 						closest = cb;
@@ -71,5 +72,6 @@ public class VirusEnvironment extends Environment {
 					v.jump();
 			}
 		}
+		return rules;
 	}
 }

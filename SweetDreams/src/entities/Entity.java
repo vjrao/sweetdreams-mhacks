@@ -4,7 +4,7 @@ import physics.BB;
 import physics.Vec;
 
 public abstract class Entity implements Drawable {
-
+	public boolean onsurface=false;
 	public final double restitution, invmass;
 	public Vec pos, v, a;
 
@@ -14,6 +14,7 @@ public abstract class Entity implements Drawable {
 		pos = new Vec();
 		v = new Vec();
 		a = new Vec();
+		onsurface=false;
 	}
 
 	public abstract BB getBBox();
