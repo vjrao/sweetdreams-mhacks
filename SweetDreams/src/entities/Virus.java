@@ -6,7 +6,12 @@ import java.awt.Graphics2D;
 import physics.*;
 
 public class Virus extends Sprite {
+	private static final double jump = -50;
+	private static final double speed = 10;
 	private static final double radius = 40;
+
+	public CommandBlock target = null;
+	public int targetSide = -1;
 
 	public Virus(double res, double invm) {
 		super(res, invm);
@@ -18,6 +23,15 @@ public class Virus extends Sprite {
 		pos.y = y;
 		v.x = xvel;
 		v.y = yvel;
+	}
+
+	public void accelerate(int direction) {
+		v.x += speed * direction;
+	}
+	
+	public void jump() {
+		if (v.y == 0)
+			v.y = jump;
 	}
 
 	public void draw(Graphics2D g, int winWidth, int winHeight) {
