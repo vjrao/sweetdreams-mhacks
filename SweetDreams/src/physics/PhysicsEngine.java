@@ -11,7 +11,7 @@ public class PhysicsEngine {
 	public static double SURFACE_FRICTION = 10;
 	public static double AIRDRAG = .001;
 	public static double GRAVITY = 200;
-	private static String forces = "f";
+	private static String forces = "gf";
 
 	public static void update(Environment env, long tdelta) {
 		double dt = tdelta / (double) 1000000000;
