@@ -8,9 +8,10 @@ import sweetdreams.Environment;
 
 public class PhysicsEngine {
 
+	public static double SURFACE_FRICTION = 10;
 	public static double AIRDRAG = .001;
 	public static double GRAVITY = 200;
-	private static String forces = "";
+	private static String forces = "f";
 
 	public static void update(Environment env, long tdelta) {
 		double dt = tdelta / (double) 1000000000;
@@ -19,7 +20,7 @@ public class PhysicsEngine {
 		int num_entities = entities.size();
 		for (Entity e : entities) {
 			if (!(e instanceof Ground)) {
-				e.a = Fnet(forces, env, e).mult(e.invmass);				
+				e.a = Fnet(forces, env, e).mult(e.invmass);
 				move(e, dt);
 			}
 		}
@@ -40,22 +41,28 @@ public class PhysicsEngine {
 	public static Vec Fnet(String s, Environment env, Entity e) {
 		Vec fnet = new Vec();
 		for (int i = 0; i < s.length(); i++) {
-			if (s.charAt(i) == '-') {
-				i++;
-				fnet = fnet.minus(force(s.charAt(i), env, e));
-			} else {
+			if (s.charAt(i) == '-')
+				fnet = fnet.minus(force(s.charAt(++i), env, e));
+			else
 				fnet = fnet.add(force(s.charAt(i), env, e));
-			}
 		}
 		return fnet;
 	}
+
+	public static final double MOVEMENT_EPSILON = 0.5;
 
 	private static Vec force(char name, Environment env, Entity e) {
 		if (name == 'g')
 			return new Vec(0.0, GRAVITY);
 		else if (name == 'd')
 			return e.v.mult(-1 * e.v.mag() * AIRDRAG);
+		else if (name == 'f')
+			// if (Math.abs(e.v.x) < MOVEMENT_EPSILON) {
+			// e.v.x = 0;
+			// return new Vec();
+			// } else
+			return new Vec(-e.v.x * SURFACE_FRICTION, 0.0);
 		else
-			return null;
+			throw new IllegalArgumentException();
 	}
 }
