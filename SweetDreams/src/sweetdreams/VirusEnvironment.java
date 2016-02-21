@@ -55,6 +55,8 @@ public class VirusEnvironment extends Environment {
 							targetSide = 8;
 					}
 				}
+				v.target = closest;
+				v.targetSide = targetSide;
 			}
 
 			// ATTACK THE TARGET
