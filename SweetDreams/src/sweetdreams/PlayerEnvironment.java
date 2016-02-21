@@ -4,7 +4,7 @@ import entities.Character;
 
 public class PlayerEnvironment extends Environment {
 
-	private static final double MAX_SPEED = 100, MIN_SPEED = 0;
+	private static final double MAX_SPEED = 100, MIN_SPEED = -100;
 	private static final double KEYBOARD_IMPULSE = 5;
 
 	private final Character player;
