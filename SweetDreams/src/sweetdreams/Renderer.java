@@ -8,6 +8,7 @@ import java.awt.geom.AffineTransform;
 
 public class Renderer {
 
+	/* if you change these here, also change them in Game.java!! */
 	private static final int WIDTH = 1600, HEIGHT = 900, HALF_HEIGHT = HEIGHT / 2;
 
 	private final Canvas top, bottom;
