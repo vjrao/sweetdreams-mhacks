@@ -21,8 +21,9 @@ public class GroundSegment extends Entity {
 	
 	public int assignHeight(int prevHeight) {
 		Random rn = new Random(); 
-		int rNum = rn.nextInt(3) - 1;
-		return prevHeight + rNum;
+		int rNum = rn.nextInt(4) - 1;
+		if (rNum > 0) { rNum--; }	// overweights for 0 change
+		return Math.max(prevHeight + rNum, 1);
 	}
 	
 	public int getHeight() { return height; }

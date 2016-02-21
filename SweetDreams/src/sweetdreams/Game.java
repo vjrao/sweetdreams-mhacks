@@ -12,6 +12,7 @@ public class Game {
 
 	/* if you change these here, also change them in Renderer.java!! */
 	private static final int WIDTH = 1600, HEIGHT = 900, HALF_HEIGHT = HEIGHT / 2;
+	private static final int NUM_SEGMENTS = 40;
 	
 	public static void main(String[] args) {
 
@@ -24,6 +25,9 @@ public class Game {
 		final VirusEnvironment top = new VirusEnvironment();
 		final PlayerEnvironment bottom = new PlayerEnvironment();
 
+		bottom.addElement(new Ground(1.0, 0, WIDTH, HALF_HEIGHT, NUM_SEGMENTS, 1));
+		bottom.addElement(new Crate(90, 400, 0, 0));
+		
 		new Thread(new Runnable() {
 			public void run() {
 				long t1 = System.nanoTime();
