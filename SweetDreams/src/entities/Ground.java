@@ -24,7 +24,7 @@ public class Ground extends Entity {
 		// super(1.0, 0.0);
 		super(res, inv);
 		ground = new GroundSegment[numSegments];
-		screenWidth = width;
+		screenWidth = width * 2;
 		screenHeight = height;
 		blockWidth = screenWidth / numSegments;
 		renderX = 0; // where in the canvas the ground will start rendering
@@ -87,7 +87,7 @@ public class Ground extends Entity {
 
 	public BB getBBox() {
 		// System.out.println(pos + "\t" + v + "\t" + a);
-		return new AABB(0, screenHeight - blockWidth, screenWidth * 2, screenHeight);
+		return new AABB(0, screenHeight - blockWidth, screenWidth, screenHeight);
 	}
 
 }

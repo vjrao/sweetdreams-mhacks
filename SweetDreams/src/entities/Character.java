@@ -61,8 +61,9 @@ public class Character extends Sprite {
 					null);
 		}
 
-		g.setColor(Color.RED);
-		g.drawRect((int) (pos.x - width / 2), (int) (pos.y - height / 2), (int) width, (int) height);
+		// g.setColor(Color.RED);
+		// g.drawRect((int) (pos.x - width / 2), (int) (pos.y - height / 2),
+		// (int) width, (int) height);
 	}
 
 }

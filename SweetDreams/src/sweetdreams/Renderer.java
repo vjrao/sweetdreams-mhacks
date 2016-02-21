@@ -90,12 +90,12 @@ public class Renderer {
 				height / (double) HALF_HEIGHT);
 
 		Graphics2D g = (Graphics2D) topStrat.getDrawGraphics();
-		AffineTransform init = g.getTransform();
+		// AffineTransform init = g.getTransform();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, width, height);
-		g.setTransform(scaled);
+		// g.setTransform(scaled);
 		top.draw(g, WIDTH, HALF_HEIGHT);
-		g.setTransform(init);
+		// g.setTransform(init);
 		g.setColor(Color.WHITE);
 		g.fillRect(0, height - BORDER / 2, width, BORDER / 2);
 		g.dispose();
@@ -104,9 +104,9 @@ public class Renderer {
 		g = (Graphics2D) bottomStrat.getDrawGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, width, height);
-		g.setTransform(scaled);
+		// g.setTransform(scaled);
 		bottom.draw(g, WIDTH, HALF_HEIGHT);
-		g.setTransform(init);
+		// g.setTransform(init);
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, width, BORDER / 2);
 		g.dispose();
