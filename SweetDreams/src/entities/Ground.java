@@ -77,7 +77,7 @@ public class Ground extends Entity {
 		/* fill in ground segments */
 		for (i = 0; i < numSegments; i++) {
 			for (j = 0; j < groundList.get(i).getHeight(); j++) {
-				g.drawImage(groundImage, renderX + i * blockWidth, renderY + screenHeight - j * blockWidth,
+				g.drawImage(groundImage, renderX + i * blockWidth, renderY + screenHeight - (j+1) * blockWidth,
 						blockWidth, blockWidth, null);				
 			}
 		}
