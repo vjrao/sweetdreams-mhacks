@@ -17,17 +17,15 @@ public class Ground extends Entity {
 	private LinkedList<GroundSegment> groundList = new LinkedList<GroundSegment>();
 	private int numSegments;
 	private int screenWidth, screenHeight, blockWidth;
-	private int renderX, renderY, playerX;
+	private int renderX, playerX;
 	private Color color;
 
-	public Ground(double res, double inv, int width, int height, int numSegments, int topOrBot) {
-//		super(1.0, 0.0);
+	public Ground(double res, double inv, int width, int height, int numSegments) {
+		// super(1.0, 0.0);
 		super(res, inv);
 		ground = new GroundSegment[numSegments];
 		screenWidth = width;
-		if (topOrBot == 1) {	// bottom
-			renderY = height;			
-		}
+		screenHeight = height;
 		blockWidth = screenWidth / numSegments;
 		renderX = 0; // where in the canvas the ground will start rendering
 		playerX = screenWidth / 3;
@@ -37,10 +35,10 @@ public class Ground extends Entity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		pos.x = 0;
-		pos.y = renderY + screenHeight - blockWidth;
-		
+		pos.y = screenHeight - blockWidth;
+
 		initializeGroundList();
 	}
 
@@ -77,20 +75,19 @@ public class Ground extends Entity {
 
 		/* fill in ground segments */
 		for (i = 0; i < numSegments; i++) {
-			g.drawImage(groundImage, renderX + i * blockWidth, renderY + screenHeight - (ground[i].getHeight() * blockWidth),
+			g.drawImage(groundImage, renderX + i * blockWidth, screenHeight - (ground[i].getHeight() * blockWidth),
 					blockWidth, ground[i].getHeight() * blockWidth, null);
 		}
-		
+
 		/* testing */
 		g.setColor(Color.GREEN);
-		g.fillRect(0, renderY + screenHeight-blockWidth, screenWidth, blockWidth);
-		
-		g.finalize();
+		g.fillRect(0, screenHeight - blockWidth, screenWidth, blockWidth);
+
 	}
 
 	public BB getBBox() {
-//		System.out.println(pos + "\t" + v + "\t" + a);
-		return new AABB(0, renderY + screenHeight-blockWidth, screenWidth*2, renderY + screenHeight);
+		// System.out.println(pos + "\t" + v + "\t" + a);
+		return new AABB(0, screenHeight - blockWidth, screenWidth * 2, screenHeight);
 	}
 
 }

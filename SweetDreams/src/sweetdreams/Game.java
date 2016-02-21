@@ -21,7 +21,7 @@ public class Game {
 		final VirusEnvironment top = new VirusEnvironment();
 		final PlayerEnvironment bottom = new PlayerEnvironment();
 
-		bottom.addElement(new Ground(1.0, 0, Renderer.WIDTH, Renderer.HALF_HEIGHT, 40, 1));
+		bottom.addElement(new Ground(1.0, 0, Renderer.WIDTH, Renderer.HALF_HEIGHT, 40));
 		bottom.addElement(new Crate(90, 400, 0, 0));
 
 		new Thread(new Runnable() {

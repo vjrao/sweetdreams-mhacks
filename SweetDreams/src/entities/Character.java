@@ -42,7 +42,7 @@ public class Character extends Sprite {
 		long millis = System.currentTimeMillis() % 1000;
 
 		// cause of standing in midair bug?
-		if (v.y < -3 || v.y > 10)
+		if (v.y < -3 || v.y > 3)
 			curr = 3;
 		else if (Math.abs(v.x) <= PhysicsEngine.MOVEMENT_EPSILON)
 			curr = 0;
