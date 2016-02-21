@@ -11,11 +11,14 @@ public class GroundSegment extends Entity {
 
 	private int blockWidth, blockHeight, height;
 	private Color color;
+	private int xPos, screenHeight;
 	
-	public GroundSegment(double res, double inv, int newWidth, int prevHeight) {
+	public GroundSegment(double res, double inv, int newWidth, int prevHeight, int newXPos, int newScreenHeight) {
 		super(res, inv);
 		blockWidth = newWidth;
 		blockHeight = newWidth;
+		xPos = newXPos;
+		screenHeight = newScreenHeight;
 		height = assignHeight(prevHeight);
 	}
 	
@@ -41,8 +44,8 @@ public class GroundSegment extends Entity {
 
 	@Override
 	public BB getBBox() {
-		// TODO Auto-generated method stub
-		return null;
+//		return new AABB(0, renderY + screenHeight-blockWidth, screenWidth*2, renderY + screenHeight);
+		return new AABB(xPos, screenHeight-(blockHeight * height), xPos + blockWidth, screenHeight-0);
 	}
 	
 }

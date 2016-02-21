@@ -1,6 +1,7 @@
 package sweetdreams;
 
 import java.io.File;
+import java.util.LinkedList;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -25,7 +26,12 @@ public class Game {
 		final VirusEnvironment top = new VirusEnvironment();
 		final PlayerEnvironment bottom = new PlayerEnvironment();
 
-		bottom.addElement(new Ground(1.0, 0, WIDTH, HALF_HEIGHT, NUM_SEGMENTS, 1));
+		Ground myGround = new Ground(1.0, 0, WIDTH, HALF_HEIGHT, NUM_SEGMENTS, 1);
+		bottom.addElement(myGround);
+		LinkedList<GroundSegment> temp = myGround.getSegmentList();
+		for (GroundSegment groundSegment : temp) {
+			bottom.addElement(groundSegment);
+		}
 		bottom.addElement(new Crate(90, 400, 0, 0));
 		
 		new Thread(new Runnable() {
