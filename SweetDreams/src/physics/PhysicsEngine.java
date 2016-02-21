@@ -1,6 +1,8 @@
 package physics;
 
 import entities.Entity;
+import entities.Ground;
+
 import java.util.ArrayList;
 import sweetdreams.Environment;
 
@@ -8,6 +10,7 @@ public class PhysicsEngine {
 
 	public static double AIRDRAG = .001;
 	public static double GRAVITY = 200;
+	private static String forces = "";
 
 	public static void update(Environment env, long tdelta) {
 		double dt = tdelta / (double) 1000000000;
@@ -15,8 +18,10 @@ public class PhysicsEngine {
 		ArrayList<Entity> entities = env.elements();
 		int num_entities = entities.size();
 		for (Entity e : entities) {
-			e.a = Fnet("gd", env, e).mult(e.invmass);
-			move(e, dt);
+			if (!(e instanceof Ground)) {
+				e.a = Fnet(forces, env, e).mult(e.invmass);				
+				move(e, dt);
+			}
 		}
 		for (int i = 0; i < num_entities; i++)
 			for (int j = i + 1; j < num_entities; j++) {

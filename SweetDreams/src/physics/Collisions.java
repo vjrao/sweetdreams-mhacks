@@ -4,7 +4,7 @@ import entities.Entity;
 
 public class Collisions {
 
-	private static final double SINK_CORRECTION_FACTOR = 0.2;
+	private static final double SINK_CORRECTION_FACTOR = 0.1;
 	private static final double SINK_CORRECTION_THRESHOLD = 0.01;
 
 	public static void resolveCollision(Entity a, Entity b, Vec norm) {
@@ -18,8 +18,18 @@ public class Collisions {
 		Vec impVec = norm.mult(impScal);
 		a.v = a.v.minus(impVec.mult(a.invmass));
 		b.v = b.v.add(impVec.mult(b.invmass));
+
+		positionalCorrection(a, b, norm);
 	}
 
+	public static void positionalCorrection(Entity a, Entity b, Vec norm) {
+	  double percent = 0.2; // usually 20% to 80%
+	  Vec penDepth = Vec.proj(a.pos.minus(b.pos).mult(SINK_CORRECTION_FACTOR/(a.invmass + b.invmass)),norm);
+	  Vec correction = norm.mult(penDepth.mag() / (a.invmass + b.invmass) * percent );
+	  a.pos = a.pos.add(correction.mult(-1*a.invmass));
+	  b.pos = b.pos.add(correction.mult(b.invmass));
+	}
+	
 	// private void sinkCorrect(Entity a, Entity b) {
 	// Vec pendepth = a.d.minus(b.d).mult(SINK_CORRECTION_FACTOR/ (a.invmass +
 	// b.invmass));
