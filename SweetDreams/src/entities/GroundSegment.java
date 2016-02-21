@@ -23,7 +23,10 @@ public class GroundSegment extends Entity {
 		Random rn = new Random(); 
 		int rNum = rn.nextInt(4) - 1;
 		if (rNum > 0) { rNum--; }	// overweights for 0 change
-		return Math.max(prevHeight + rNum, 1);
+		if (prevHeight + rNum > 3) {
+			return 3;	// prevent it from getting too tall
+		}
+		return Math.max((prevHeight + rNum), 1);
 	}
 	
 	public int getHeight() { return height; }
