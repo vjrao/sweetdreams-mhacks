@@ -38,23 +38,29 @@ public class Character extends Sprite {
 	}
 
 	public void update(long tdelta) {
-		
+
 		long millis = System.currentTimeMillis() % 1000;
-		
-		if (v.y < -3 || v.y > 10) { curr = 3; } 
-		else if (v.x == 0) { curr = 0; } 
-		else if ((millis/170)%2 == 0) { curr = 1; }
-		else { curr = 2; }
+
+		// cause of standing in midair bug?
+		if (v.y < -3 || v.y > 10)
+			curr = 3;
+		else if (Math.abs(v.x) <= 0.1)
+			curr = 0;
+		else if ((millis / 170) % 2 == 0)
+			curr = 1;
+		else
+			curr = 2;
 	}
-	
+
 	public void draw(Graphics2D g, int winWidth, int winHeight) {
 		if (v.x < 0) {
-			g.drawImage(images[curr], (int) (pos.x - width / 2 + width), (int) (pos.y - height / 2), (int) (-1 * width), (int) height, null);
+			g.drawImage(images[curr], (int) (pos.x - width / 2 + width), (int) (pos.y - height / 2), (int) (-1 * width),
+					(int) height, null);
+		} else {
+			g.drawImage(images[curr], (int) (pos.x - width / 2), (int) (pos.y - height / 2), (int) width, (int) height,
+					null);
 		}
-		else {
-			g.drawImage(images[curr], (int) (pos.x - width / 2), (int) (pos.y - height / 2), (int) width, (int) height, null);
-		}
-		
+
 		g.setColor(Color.RED);
 		g.drawRect((int) (pos.x - width / 2), (int) (pos.y - height / 2), (int) width, (int) height);
 	}
