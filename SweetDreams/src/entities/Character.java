@@ -29,7 +29,7 @@ public class Character extends Sprite {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		pos.x = 100; // center
+		pos.x = 200; // center
 		pos.y = 0; // center
 	}
 

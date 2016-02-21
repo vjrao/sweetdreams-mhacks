@@ -2,9 +2,7 @@ package sweetdreams;
 
 import java.io.File;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import javax.sound.sampled.*;
 import entities.*;
 import physics.PhysicsEngine;
 
@@ -22,7 +20,7 @@ public class Game {
 		final PlayerEnvironment bottom = new PlayerEnvironment();
 
 		bottom.addElement(new Ground(1.0, 0, Renderer.WIDTH, Renderer.HALF_HEIGHT, 40));
-		bottom.addElement(new Crate(90, 400, 0, 0));
+		bottom.addElement(new Crate(90, 0, 0, 0));
 
 		new Thread(new Runnable() {
 			public void run() {
@@ -44,7 +42,7 @@ public class Game {
 					// update player world with virus influence
 					// update virus world with player influence
 
-					PhysicsEngine.update(top, tdelta);
+					PhysicsEngine.update(top, tdelta / 400);
 					PhysicsEngine.update(bottom, tdelta);
 					try {
 						Thread.sleep(20);

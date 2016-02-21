@@ -25,6 +25,9 @@ public class Crate extends Entity {
 	public void draw(Graphics2D g, int winWidth, int winHeight) {
 		g.setColor(Color.GREEN);
 		g.fillRect((int) (pos.x - width / 2), (int) (pos.y - height / 2), (int) width, (int) height);
+		g.setColor(Color.RED);
+		g.drawRect((int) (pos.x - width / 2), (int) (pos.y - height / 2), (int) (width),
+				(int) (height));
 	}
 
 	public BB getBBox() {

@@ -8,4 +8,8 @@ public class AABB extends BB {
 		min = new Vec(x, y);
 		max = new Vec(x2, y2);
 	}
+
+	public String toString() {
+		return min + " " + max + ";\t";
+	}
 }

@@ -1,5 +1,8 @@
 package physics;
 
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
+
 import entities.Entity;
 
 public class Collisions {
@@ -59,24 +62,31 @@ public class Collisions {
 	}
 
 	private static Vec intersects(AABB a, AABB b) {
-		Vec norm = b.min.minus(a.min);
-		double xpen = (a.max.x - a.min.x) / 2 + (b.max.x - b.min.x) / 2 - Math.abs(norm.x);
-		if (xpen > 0) {
-			double ypen = (a.max.y - a.min.y) / 2 + (b.max.y - b.min.y) / 2 - Math.abs(norm.y);
-			if (ypen > 0) {
-				if (xpen < ypen)
-					if (norm.x < 0)
-						return new Vec(-1, 0);
-					else
-						return new Vec(1, 0);
-				else if (norm.y < 0)
-					return new Vec(0, -1);
-				else
-					return new Vec(0, 1);
-			} else
-				return null;
-		} else
+		Rectangle2D r1 = new Rectangle((int) (a.min.x), (int) (a.min.y), (int) (a.max.x - a.min.x),
+				(int) (a.max.y - a.min.y));
+		Rectangle2D r2 = new Rectangle((int) (b.min.x), (int) (b.min.y), (int) (b.max.x - b.min.x),
+				(int) (b.max.y - b.min.y));
+		Rectangle2D r = r1.createIntersection(r2);
+		if (r.isEmpty())
 			return null;
+		else if (r.getWidth() > r.getHeight())
+			return new Vec(0, -1);
+		else if (r.getHeight() > r.getWidth())
+			return new Vec(-1, 0);
+		else
+			return null;
+		/*
+		 * if (!r1.intersects(r2)) return null;
+		 * 
+		 * Vec norm = b.min.minus(a.min); double xpen = (a.max.x - a.min.x) / 2
+		 * + (b.max.x - b.min.x) / 2 - Math.abs(norm.x); if (xpen > 0) { double
+		 * ypen = (a.max.y - a.min.y) / 2 + (b.max.y - b.min.y) / 2 -
+		 * Math.abs(norm.y); if (ypen > 0) { System.out.println(a + " " + b +
+		 * " " + norm); if (xpen < ypen) if (norm.x < 0) return new Vec(-1, 0);
+		 * else return new Vec(1, 0); else if (norm.y < 0) return new Vec(0,
+		 * -1); else return new Vec(0, 1); } else return null; } else return
+		 * null;
+		 */
 	}
 
 	private static Vec intersects(AABB a, Circle b) {
