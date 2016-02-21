@@ -45,17 +45,17 @@ public class Ground extends Entity {
 
 	public void initializeGroundList() {
 		int i;
-		groundList.add(new GroundSegment(restitution, invmass, blockWidth, 2));
+		groundList.add(new GroundSegment(restitution, invmass, blockWidth, 2, 0, screenHeight));
 		for (i = 1; i < numSegments + 1; i++) { // creating numSegments + 1
 												// segments
-			groundList.add(new GroundSegment(restitution, invmass, blockWidth, groundList.get(i - 1).getHeight()));
+			groundList.add(new GroundSegment(restitution, invmass, blockWidth, groundList.get(i - 1).getHeight(), i*blockWidth, screenHeight));
 		}
 	}
 
 	/* delete first GroundSegment and generate/add new last */
 	public void cycleGroundList() {
 		groundList.removeFirst();
-		groundList.add(new GroundSegment(restitution, invmass, blockWidth, groundList.getLast().getHeight()));
+		groundList.add(new GroundSegment(restitution, invmass, blockWidth, groundList.getLast().getHeight(), screenWidth, screenHeight));
 	}
 
 	public void update(int deltaPlayerX) {
@@ -93,10 +93,12 @@ public class Ground extends Entity {
 		
 		g.finalize();
 	}
+	
+	public LinkedList<GroundSegment> getSegmentList() { return groundList; }
 
 	public BB getBBox() {
-//		System.out.println(pos + "\t" + v + "\t" + a);
-		return new AABB(0, renderY + screenHeight-blockWidth, screenWidth*2, renderY + screenHeight);
+//		return new AABB(0, renderY + screenHeight-blockWidth, screenWidth*2, renderY + screenHeight);
+		return new AABB(0, 0, 0, 0);
 	}
 
 }

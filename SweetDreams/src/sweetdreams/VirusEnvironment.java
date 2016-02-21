@@ -7,7 +7,7 @@ public class VirusEnvironment extends Environment {
 
 	public VirusEnvironment() {
 		for (int i = 0; i < 10; i++)
-			addElement(new Virus(Math.random() / 2 + 0.5, Math.random() * 2));
+			addElement(new Virus(Math.random() / 2 + 0.5, 1));
 	}
 
 	/**
