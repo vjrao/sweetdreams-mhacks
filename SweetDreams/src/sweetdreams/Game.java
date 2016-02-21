@@ -10,9 +10,6 @@ import physics.PhysicsEngine;
 
 public class Game {
 
-	/* if you change these here, also change them in Renderer.java!! */
-	private static final int WIDTH = 1600, HEIGHT = 900, HALF_HEIGHT = HEIGHT / 2;
-	
 	public static void main(String[] args) {
 
 		System.setProperty("sun.java2d.opengl", "true");
@@ -23,6 +20,9 @@ public class Game {
 
 		final VirusEnvironment top = new VirusEnvironment();
 		final PlayerEnvironment bottom = new PlayerEnvironment();
+
+		bottom.addElement(new Ground(1.0, 0, Renderer.WIDTH, Renderer.HALF_HEIGHT, 40, 1));
+		bottom.addElement(new Crate(90, 400, 0, 0));
 
 		new Thread(new Runnable() {
 			public void run() {

@@ -11,7 +11,7 @@ public class PhysicsEngine {
 	public static double SURFACE_FRICTION = 10;
 	public static double AIRDRAG = .001;
 	public static double GRAVITY = 200;
-	private static String forces = "f";
+	private static String forces = "fgd";
 
 	public static void update(Environment env, long tdelta) {
 		double dt = tdelta / (double) 1000000000;
@@ -49,7 +49,7 @@ public class PhysicsEngine {
 		return fnet;
 	}
 
-	public static final double MOVEMENT_EPSILON = 0.5;
+	public static final double MOVEMENT_EPSILON = 5.0;
 
 	private static Vec force(char name, Environment env, Entity e) {
 		if (name == 'g')
@@ -57,11 +57,11 @@ public class PhysicsEngine {
 		else if (name == 'd')
 			return e.v.mult(-1 * e.v.mag() * AIRDRAG);
 		else if (name == 'f')
-			// if (Math.abs(e.v.x) < MOVEMENT_EPSILON) {
-			// e.v.x = 0;
-			// return new Vec();
-			// } else
-			return new Vec(-e.v.x * SURFACE_FRICTION, 0.0);
+			if (Math.abs(e.v.x) < MOVEMENT_EPSILON) {
+				e.v.x = 0;
+				return new Vec();
+			} else
+				return new Vec(-e.v.x * SURFACE_FRICTION, 0.0);
 		else
 			throw new IllegalArgumentException();
 	}

@@ -44,7 +44,7 @@ public class Character extends Sprite {
 		// cause of standing in midair bug?
 		if (v.y < -3 || v.y > 10)
 			curr = 3;
-		else if (Math.abs(v.x) <= 0.1)
+		else if (Math.abs(v.x) <= PhysicsEngine.MOVEMENT_EPSILON)
 			curr = 0;
 		else if ((millis / 170) % 2 == 0)
 			curr = 1;
