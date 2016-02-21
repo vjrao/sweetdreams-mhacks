@@ -10,7 +10,7 @@ public class PhysicsEngine {
 
 	public static double AIRDRAG = .001;
 	public static double GRAVITY = 200;
-	private static String forces = "";
+	private static String forces = "g";
 
 	public static void update(Environment env, long tdelta) {
 		double dt = tdelta / (double) 1000000000;
