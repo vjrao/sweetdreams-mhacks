@@ -7,6 +7,9 @@ import physics.*;
 
 public class Virus extends Sprite {
 	private static final double radius = 40;
+	
+	public CommandBlock target = null;
+	public int targetSide = -1;
 
 	public Virus(double res, double invm) {
 		super(res, invm);

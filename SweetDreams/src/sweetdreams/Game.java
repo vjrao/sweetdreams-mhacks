@@ -14,7 +14,7 @@ public class Game {
 		System.setProperty("sun.java2d.opengl", "true");
 		System.setProperty("sun.awt.noerasebackground", "true");
 
-		System.out.println("Hello, world! Trying to actually run a game here, amazingly enough!");
+		System.out.println("Hello, world! We're making good progress on a 2D OpenGL clone designed to revolutionize the graphical computing market!");
 
 		final VirusEnvironment top = new VirusEnvironment();
 		final PlayerEnvironment bottom = new PlayerEnvironment();
