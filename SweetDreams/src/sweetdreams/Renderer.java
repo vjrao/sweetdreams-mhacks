@@ -31,6 +31,48 @@ public class Renderer {
 		window.add(container);
 		window.setVisible(true);
 		window.pack();
+		KeyAdapter ka = new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				handleKeys(e.getKeyCode(), true);
+			}
+
+			public void keyReleased(KeyEvent e) {
+				handleKeys(e.getKeyCode(), false);
+			}
+
+			public void handleKeys(int keycode, boolean state) {
+				switch (keycode) {
+				case KeyEvent.VK_ESCAPE:
+					System.exit(0);
+					break;
+				case KeyEvent.VK_UP:
+					keyCallbacks.setKey(0, state);
+					break;
+				case KeyEvent.VK_LEFT:
+					keyCallbacks.setKey(1, state);
+					break;
+				case KeyEvent.VK_DOWN:
+					keyCallbacks.setKey(2, state);
+					break;
+				case KeyEvent.VK_RIGHT:
+					keyCallbacks.setKey(3, state);
+					break;
+				case KeyEvent.VK_W:
+					keyCallbacks.setKey(4, state);
+					break;
+				case KeyEvent.VK_A:
+					keyCallbacks.setKey(5, state);
+					break;
+				case KeyEvent.VK_S:
+					keyCallbacks.setKey(6, state);
+					break;
+				case KeyEvent.VK_D:
+					keyCallbacks.setKey(7, state);
+					break;
+				}
+
+			}
+		};
 		window.addKeyListener(ka);
 		container.addKeyListener(ka);
 		top.addKeyListener(ka);
@@ -43,48 +85,6 @@ public class Renderer {
 		bottomStrat = bottom.getBufferStrategy();
 	}
 
-	private static final KeyAdapter ka = new KeyAdapter() {
-		public void keyPressed(KeyEvent e) {
-			handleKeys(e.getKeyCode(), true);
-		}
-
-		public void keyReleased(KeyEvent e) {
-			handleKeys(e.getKeyCode(), false);
-		}
-
-		public void handleKeys(int keycode, boolean state) {
-			switch (keycode) {
-			case KeyEvent.VK_ESCAPE:
-				System.exit(0);
-				break;
-			case KeyEvent.VK_UP:
-				keyCallbacks.setKey(0, state);
-				break;
-			case KeyEvent.VK_LEFT:
-				keyCallbacks.setKey(1, state);
-				break;
-			case KeyEvent.VK_DOWN:
-				keyCallbacks.setKey(2, state);
-				break;
-			case KeyEvent.VK_RIGHT:
-				keyCallbacks.setKey(3, state);
-				break;
-			case KeyEvent.VK_W:
-				keyCallbacks.setKey(4, state);
-				break;
-			case KeyEvent.VK_A:
-				keyCallbacks.setKey(5, state);
-				break;
-			case KeyEvent.VK_S:
-				keyCallbacks.setKey(6, state);
-				break;
-			case KeyEvent.VK_D:
-				keyCallbacks.setKey(7, state);
-				break;
-			}
-
-		};
-	
 	private static final int BORDER = 8;
 
 	public void update(Environment top, Environment bottom) {
