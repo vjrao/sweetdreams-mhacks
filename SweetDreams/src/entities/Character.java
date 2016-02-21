@@ -53,13 +53,14 @@ public class Character extends Sprite {
 
 	public void draw(Graphics2D g, int winWidth, int winHeight) {
 		if (v.x < 0) {
-			g.drawImage(images[curr], (int) (pos.x - width / 2 + width), (int) (pos.y - height / 2), (int) (-1 * width),
+			g.drawImage(images[curr], (int) (pos.x - width / 2 + width), (int) (pos.y - height / 2) - 30, (int) (-1 * width),
 					(int) height, null);
 		} else {
-			g.drawImage(images[curr], (int) (pos.x - width / 2), (int) (pos.y - height / 2), (int) width, (int) height,
+			g.drawImage(images[curr], (int) (pos.x - width / 2), (int) (pos.y - height / 2) - 30, (int) width, (int) height,
 					null);
 		}
 
+		System.out.println("Y position" + pos.y + (height/2));
 		/* testing
 		g.setColor(Color.RED);
 		g.drawRect((int) (pos.x - width / 2), (int) (pos.y - height / 2), (int) width, (int) height);
